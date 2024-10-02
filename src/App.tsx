@@ -14,7 +14,7 @@ const RotatingImage: React.FC<RotatingImageProps> = ({ textureUrl }) => {
 
   const rotationSpeedX = 0
   const rotationSpeedY = 0
-  const rotationSpeedZ = -0.1
+  const rotationSpeedZ = -0.02
   const initialRotationX = Math.PI / 2;
   const initialRotationY = 0
   const initialRotationZ = 0
@@ -41,7 +41,7 @@ const RotatingImage: React.FC<RotatingImageProps> = ({ textureUrl }) => {
     <mesh
       ref={ref}
       rotation={[initialRotationX, initialRotationY, initialRotationZ]}
-      position={[-0.006125, 0, -0.5]}
+      position={[0, 0, -0.75]}
     >
       <cylinderGeometry args={[1.5, 1.5, 0.1, 32]} />
       <meshBasicMaterial map={texture} side={DoubleSide} transparent={true} />
