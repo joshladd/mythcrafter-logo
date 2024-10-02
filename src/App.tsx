@@ -71,51 +71,51 @@ const App: React.FC = () => {
       
 
       <Canvas
-        className="w-full h-2/3"
-        style={{ imageRendering: 'pixelated' }} // Ensures the pixelated effect in CSS
-        gl={{
-          preserveDrawingBuffer: true,
-          antialias: false, // Disable anti-aliasing for sharper edges
-          pixelRatio: pixelRatio, // Set the pixel ratio dynamically
-        }}
-        camera={{ position: [0, 0, 5], zoom: 1, fov: 50 }} // Disable zoom and rotation by fixing the camera
+      className="w-full h-2/3"
+      style={{ imageRendering: 'pixelated' }} // Ensures the pixelated effect in CSS
+      gl={{
+        preserveDrawingBuffer: true,
+        antialias: false, // Disable anti-aliasing for sharper edges
+        pixelRatio: pixelRatio, // Set the pixel ratio dynamically
+      }}
+      camera={{ position: [0, 0, 5], zoom: 1, fov: 50 }} // Disable zoom and rotation by fixing the camera
+    >
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} />
+
+      {/* Rotating image */}
+      <RotatingImage textureUrl="mythcrafter.png" pixelRatio={pixelRatio} />
+
+      {/* Top Text - "mythcrafter" */}
+      <Text
+        position={[0, 2, 0]} // Adjust the Y position to place it above the rotating image
+        fontSize={0.7}
+        letterSpacing={0.05}
+        anchorX="center"
+        anchorY="middle"
+        material={textMaterial} // Passing the material here
+        outlineColor="black"
+        outlineWidth={0.02}
+        font="vinque rg.otf" // Ensure the correct path for the font
       >
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
+        Mythcrafter
+      </Text>
 
-        {/* Rotating image */}
-        <RotatingImage textureUrl="mythcrafter.png" pixelRatio={pixelRatio} />
-
-        {/* Top Text - "mythcrafter" */}
-        <Text
-          position={[0, 2, 0]} // Adjust the Y position to place it above the rotating image
-          fontSize={0.7}
-          letterSpacing={0.05}
-          anchorX="center"
-          anchorY="middle"
-          material={textMaterial} // Passing the material here
-          outlineColor="black"
-          outlineWidth={0.02}
-          font="vinque rg.otf" // Ensure the correct path for the font
-        >
-          Mythcrafter
-        </Text>
-
-        {/* Bottom Text - "studio" */}
-        <Text
-          position={[0, -2, 0]} // Adjust the Y position to place it below the rotating image
-          fontSize={0.7}
-          letterSpacing={0.05}
-          anchorX="center"
-          anchorY="middle"
-          material={textMaterial} // Passing the material here
-          outlineColor="black"
-          outlineWidth={0.02}
-          font="vinque rg.otf"
-        >
-          Studio
-        </Text>
-      </Canvas>
+      {/* Bottom Text - "studio" */}
+      <Text
+        position={[0, -2, 0]} // Adjust the Y position to place it below the rotating image
+        fontSize={0.7}
+        letterSpacing={0.05}
+        anchorX="center"
+        anchorY="middle"
+        material={textMaterial} // Passing the material here
+        outlineColor="black"
+        outlineWidth={0.02}
+        font="vinque rg.otf"
+      >
+        Studio
+      </Text>
+    </Canvas>
     </div>
   );
 };
