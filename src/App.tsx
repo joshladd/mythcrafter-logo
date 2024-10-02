@@ -1,24 +1,24 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader, DoubleSide, MeshStandardMaterial } from "three";
-import { OrbitControls, Text } from "@react-three/drei";
+import { Text } from "@react-three/drei";
 
 // Define the props that RotatingImage will receive
 interface RotatingImageProps {
   textureUrl: string;
+  pixelRatio: number;
 }
 
-const RotatingImage: React.FC<RotatingImageProps> = ({ textureUrl }) => {
+const RotatingImage: React.FC<RotatingImageProps> = ({ textureUrl, pixelRatio }) => {
   const ref = useRef<any>();
-  const texture = useLoader(TextureLoader, textureUrl); // Replace with the correct path to your image
+  const texture = useLoader(TextureLoader, textureUrl);
 
-  const rotationSpeedX = 0
-  const rotationSpeedY = 0
-  const rotationSpeedZ = -0.02
+  const rotationSpeedX = 0;
+  const rotationSpeedY = 0;
+  const rotationSpeedZ = -0.02;
   const initialRotationX = Math.PI / 2;
-  const initialRotationY = 0
-  const initialRotationZ = 0
-  const pixelRatio = 1; // State to control canvas resolution (pixelation)
+  const initialRotationY = 0;
+  const initialRotationZ = 0;
 
   useEffect(() => {
     if (texture) {
@@ -34,7 +34,8 @@ const RotatingImage: React.FC<RotatingImageProps> = ({ textureUrl }) => {
       ref.current.rotation.y += rotationSpeedY;
       ref.current.rotation.z += rotationSpeedZ;
     }
-    gl.setPixelRatio(pixelRatio); // Set pixel ratio for resolution control
+    gl.setPixelRatio(pixelRatio); // Adjust canvas resolution dynamically
+    gl.domElement.style.imageRendering = pixelRatio > 1 ? "auto" : "pixelated"; // Apply pixelation effect
   });
 
   return (
@@ -50,13 +51,13 @@ const RotatingImage: React.FC<RotatingImageProps> = ({ textureUrl }) => {
 };
 
 const App: React.FC = () => {
+  const [pixelRatio, setPixelRatio] = useState<number>(1); // State to control canvas resolution (pixelation)
 
-  // useEffect(() => {
-  //   const link = document.createElement("link");
-  //   link.href = "https://fonts.googleapis.com/css2?family=Almendra+SC&display=swap";
-  //   link.rel = "stylesheet";
-  //   document.head.appendChild(link);
-  // }, []);
+  // Slider handler for changing the pixel ratio
+  const handlePixelRatioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(event.target.value);
+    setPixelRatio(value);
+  };
 
   const textMaterial = new MeshStandardMaterial({
     color: "#fc712b", // Vibrant burnt orange
@@ -65,13 +66,25 @@ const App: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen bg-gray-900">
-      <Canvas className="w-full h-2/3">
+    <div className="flex flex-col items-center justify-center w-screen h-screen p-40 bg-gray-900">
+      {/* Slider for controlling pixel ratio */}
+      
+
+      <Canvas
+        className="w-full h-2/3"
+        style={{ imageRendering: 'pixelated' }} // Ensures the pixelated effect in CSS
+        gl={{
+          preserveDrawingBuffer: true,
+          antialias: false, // Disable anti-aliasing for sharper edges
+          pixelRatio: pixelRatio, // Set the pixel ratio dynamically
+        }}
+        camera={{ position: [0, 0, 5], zoom: 1, fov: 50 }} // Disable zoom and rotation by fixing the camera
+      >
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
 
         {/* Rotating image */}
-        <RotatingImage textureUrl="mythcrafter.png" />
+        <RotatingImage textureUrl="mythcrafter.png" pixelRatio={pixelRatio} />
 
         {/* Top Text - "mythcrafter" */}
         <Text
@@ -87,6 +100,7 @@ const App: React.FC = () => {
         >
           Mythcrafter
         </Text>
+
         {/* Bottom Text - "studio" */}
         <Text
           position={[0, -2, 0]} // Adjust the Y position to place it below the rotating image
@@ -101,8 +115,6 @@ const App: React.FC = () => {
         >
           Studio
         </Text>
-
-        <OrbitControls />
       </Canvas>
     </div>
   );
