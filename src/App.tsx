@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader, DoubleSide, MeshStandardMaterial } from "three";
 import { OrbitControls, Text } from "@react-three/drei";
@@ -12,13 +12,13 @@ const RotatingImage: React.FC<RotatingImageProps> = ({ textureUrl }) => {
   const ref = useRef<any>();
   const texture = useLoader(TextureLoader, textureUrl); // Replace with the correct path to your image
 
-  const [rotationSpeedX, setRotationSpeedX] = useState(0);
-  const [rotationSpeedY, setRotationSpeedY] = useState(0);
-  const [rotationSpeedZ, setRotationSpeedZ] = useState(-0.01);
-  const [initialRotationX, setInitialRotationX] = useState(Math.PI / 2);
-  const [initialRotationY, setInitialRotationY] = useState(0);
-  const [initialRotationZ, setInitialRotationZ] = useState(0);
-  const [pixelRatio, setPixelRatio] = useState(1); // State to control canvas resolution (pixelation)
+  const rotationSpeedX = 0
+  const rotationSpeedY = 0
+  const rotationSpeedZ = -0.1
+  const initialRotationX = Math.PI / 2;
+  const initialRotationY = 0
+  const initialRotationZ = 0
+  const pixelRatio = 1; // State to control canvas resolution (pixelation)
 
   useEffect(() => {
     if (texture) {
