@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { TextureLoader, DoubleSide, MeshStandardMaterial } from "three";
 import { Text } from "@react-three/drei";
@@ -51,13 +51,9 @@ const RotatingImage: React.FC<RotatingImageProps> = ({ textureUrl, pixelRatio })
 };
 
 const App: React.FC = () => {
-  const [pixelRatio, setPixelRatio] = useState<number>(1); // State to control canvas resolution (pixelation)
-
+  const pixelRatio = 1;
   // Slider handler for changing the pixel ratio
-  const handlePixelRatioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(event.target.value);
-    setPixelRatio(value);
-  };
+
 
   const textMaterial = new MeshStandardMaterial({
     color: "#fc712b", // Vibrant burnt orange
