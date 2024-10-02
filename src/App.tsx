@@ -61,7 +61,7 @@ const App: React.FC = () => {
   const textMaterial = new MeshStandardMaterial({
     color: "#fc712b", // Vibrant burnt orange
     roughness: 50, // Controls how rough the material is (lower = shinier)
-    metalness: -60, // Adds a bit of metallic effect for realism
+    metalness: -15, // Adds a bit of metallic effect for realism
   });
 
   return (
@@ -75,29 +75,29 @@ const App: React.FC = () => {
 
         {/* Top Text - "mythcrafter" */}
         <Text
-      position={[0, 2, 0]} // Adjust the Y position to place it above the rotating image
-      fontSize={0.7}
-      letterSpacing={0.05}
-      anchorX="center"
-      anchorY="middle"
-      material={textMaterial} // Passing the material here
-      outlineColor="black"
-      outlineWidth={0.02}
-      font="vinque rg.otf" // Ensure the correct path for the font
-    >
-      Mythcrafter
-    </Text>
+          position={[0, 2, 0]} // Adjust the Y position to place it above the rotating image
+          fontSize={0.7}
+          letterSpacing={0.05}
+          anchorX="center"
+          anchorY="middle"
+          material={textMaterial} // Passing the material here
+          outlineColor="black"
+          outlineWidth={0.02}
+          font="vinque rg.otf" // Ensure the correct path for the font
+        >
+          Mythcrafter
+        </Text>
         {/* Bottom Text - "studio" */}
         <Text
           position={[0, -2, 0]} // Adjust the Y position to place it below the rotating image
           fontSize={0.7}
-      letterSpacing={0.05}
-      anchorX="center"
-      anchorY="middle"
-      material={textMaterial} // Passing the material here
-      outlineColor="black"
-      outlineWidth={0.02}
-      font="vinque rg.otf"
+          letterSpacing={0.05}
+          anchorX="center"
+          anchorY="middle"
+          material={textMaterial} // Passing the material here
+          outlineColor="black"
+          outlineWidth={0.02}
+          font="vinque rg.otf"
         >
           Studio
         </Text>
